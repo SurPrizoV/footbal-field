@@ -1,0 +1,214 @@
+.football-formation-container {
+  display: flex;
+  width: 100%;
+  height: 85vh;
+  margin: 20px 0;
+  overflow: hidden;
+}
+
+.players-panel {
+  width: 320px;
+  padding: 16px;
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+  overflow-y: auto;
+}
+
+.players-list {
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.player-item {
+  padding: 0;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .player-inner {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+  }
+
+  .player-photo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 12px;
+    border: 2px solid #3f51b5;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .player-info {
+    flex: 1;
+  }
+
+  .player-number {
+    font-weight: bold;
+    font-size: 16px;
+    color: #3f51b5;
+  }
+
+  .player-name {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.87);
+  }
+}
+
+.empty-list-message {
+  padding: 16px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.54);
+  font-style: italic;
+}
+
+.field-container {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+}
+
+.football-field {
+  width: 100%;
+  height: 100%;
+  background-image: url("../../../../../public/assets/football-field.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  overflow: hidden;
+}
+
+.field-position {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: 2px dashed rgba(255, 255, 255, 0.6);
+  transition: all 0.3s ease;
+
+  &.occupied {
+    background-color: rgba(63, 81, 181, 0.2);
+    border: 2px solid rgba(63, 81, 181, 0.6);
+  }
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+.position-placeholder {
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+}
+
+.positioned-player {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  .player-photo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #fff;
+    margin-bottom: 5px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .player-number {
+    font-weight: bold;
+    font-size: 16px;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    background-color: #3f51b5;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2px;
+  }
+
+  .player-name {
+    font-size: 12px;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    font-weight: bold;
+  }
+
+  .remove-button {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 24px;
+    height: 24px;
+    min-width: unset;
+    line-height: 24px;
+    padding: 0;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+
+    .mat-icon {
+      font-size: 14px;
+      height: 14px;
+      width: 14px;
+      line-height: 14px;
+    }
+  }
+
+  &:hover .remove-button {
+    opacity: 1;
+  }
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.players-list.cdk-drop-list-dragging .player-item:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}

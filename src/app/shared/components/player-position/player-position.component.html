@@ -1,0 +1,65 @@
+<div class="football-formation-container">
+  <div class="players-panel">
+    <h2>Список игроков</h2>
+    <div
+      cdkDropList
+      #playersList="cdkDropList"
+      [cdkDropListData]="players"
+      [cdkDropListConnectedTo]="fieldPositionsIds"
+      class="players-list"
+      (cdkDropListDropped)="onDrop($event)"
+    >
+      <div
+        class="player-item"
+        *ngFor="let player of players"
+        cdkDrag
+        [cdkDragData]="player.id"
+      >
+        <div class="player-photo">
+          <img [src]="player.photoUrl" alt="Фото игрока" />
+        </div>
+        <div class="player-info">
+          <div class="player-number">{{ player.number }}</div>
+          <div class="player-name">
+            {{ player.firstName }} {{ player.lastName }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="field-container">
+    <div class="football-field">
+      <div
+        *ngFor="let position of fieldPositions"
+        [id]="position.id"
+        cdkDropList
+        [cdkDropListData]="position.id"
+        [cdkDropListConnectedTo]="['playersList']"
+        class="field-position"
+        (cdkDropListDropped)="onDrop($event)"
+        [style.left.%]="position.x"
+        [style.top.%]="position.y"
+        [class.occupied]="position.occupied"
+      >
+        <div *ngIf="position.occupied" class="positioned-player">
+          <div class="player-photo">
+            <img
+              [src]="getPlayerAtPosition(position.id)?.photoUrl"
+              alt="Фото игрока"
+            />
+          </div>
+          <div class="player-number">
+            {{ getPlayerAtPosition(position.id)?.number }}
+          </div>
+          <div class="player-name">
+            {{ getPlayerAtPosition(position.id)?.lastName }}
+          </div>
+          <button class="remove-button" (click)="removeFromField(position.id)">
+            X
+          </button>
+        </div>
+        <div *ngIf="!position.occupied" class="position-placeholder">+</div>
+      </div>
+    </div>
+  </div>
+</div>
